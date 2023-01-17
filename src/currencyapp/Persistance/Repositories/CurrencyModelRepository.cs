@@ -7,7 +7,7 @@ using Persistance.Contexts;
 
 namespace Persistance.Repositories;
 
-public class CurrencyModelRepository : EfRepositoryBase<CurrencyModel, BaseDbContext>, ICurrencyModelRepository
+public class CurrencyModelRepository : EfRepositoryBase<Currency, BaseDbContext>, ICurrencyModelRepository
 {
     public CurrencyModelRepository(BaseDbContext context) : base(context)
     {

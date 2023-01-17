@@ -38,6 +38,6 @@ namespace Persistance.Contexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-        DbSet<CurrencyModel> Currencies { get; set; }
+        DbSet<Currency> Currencies { get; set; }
     }
 }

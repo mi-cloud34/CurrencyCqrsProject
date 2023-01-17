@@ -69,7 +69,19 @@ public class GetListCurrencyModelQuery : IRequest<CurrencyModelListModel>
             using (TextReader reader = new StringReader(xmlString))
             {
                 MyClass myClass = (MyClass)serializer.Deserialize(reader);
-                myClass.Currencies.ForEach(x => _currencyModelRepository.Add(JsonSerializer.Deserialize<List<CurrencyModel>>(x)));
+
+                myClass.Currencies.ForEach(x => _currencyModelRepository.Add(new()
+                {
+                    Unit = Convert.ToInt32(x.Unit ?? default) ,
+                    Isim = x.Isim ?? default,
+                    CurrencyName = x.CurrencyName ?? default,
+                    ForexBuying = Convert.ToDouble(x.ForexBuying??default),
+                    ForexSelling = Convert.ToDouble(x.ForexSelling ?? default),
+                    BanknoteBuying = Convert.ToDouble(x.BanknoteBuying ?? default),
+                    BanknoteSelling = Convert.ToDouble(x.BanknoteSelling ?? default),
+                    CrossRateUSD = Convert.ToDouble(x.CrossRateUSD ?? default),
+                    CrossRateOther = Convert.ToDouble(x.CrossRateOther ?? default),
+                }));
             }
             //var currency = JsonSerializer.Deserialize<List<CurrencyModel>>(json);
             //foreach (var c in currency)
@@ -80,7 +92,7 @@ public class GetListCurrencyModelQuery : IRequest<CurrencyModelListModel>
 
             //    // //var json = JsonSerializer.Serialize<CurrencyModel>(c)
             //}
-            IPaginate<CurrencyModel> currencyy = await _currencyModelRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<Currency> currencyy =  await _currencyModelRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
             CurrencyModelListModel mappedCarListModel = _mapper.Map<CurrencyModelListModel>(currencyy);
             return mappedCarListModel;
         }
@@ -100,11 +112,11 @@ public class MyClass
     public string BultenNo { get; set; }
 
     [XmlElement("Currency")]
-    public List<Currency> Currencies { get; set; }
+    public List<Currencyy> Currencies { get; set; }
 }
 
-[XmlType("Currency")]
-public class Currency
+[XmlType("Currencyy")]
+public class Currencyy
 {
     [XmlAttribute("CrossOrder")]
     public string CrossOrder { get; set; }
@@ -116,29 +128,29 @@ public class Currency
     public string CurrencyCode { get; set; }
 
     [XmlElement("Unit")]
-    public string Unit { get; set; }
+    public int ? Unit { get; set; }
 
     [XmlElement("Isim")]
-    public string Isim { get; set; }
+    public string ? Isim { get; set; }
 
     [XmlElement("CurrencyName")]
-    public string CurrencyName { get; set; }
+    public string ? CurrencyName { get; set; }
 
     [XmlElement("ForexBuying")]
-    public string ForexBuying { get; set; }
+    public double ? ForexBuying { get; set; }
 
     [XmlElement("ForexSelling")]
-    public string ForexSelling { get; set; }
+    public double ? ForexSelling { get; set; }
 
     [XmlElement("BanknoteBuying")]
-    public string BanknoteBuying { get; set; }
+    public double ? BanknoteBuying { get; set; }
 
     [XmlElement("BanknoteSelling")]
-    public string BanknoteSelling { get; set; }
+    public double ? BanknoteSelling { get; set; }
 
     [XmlElement("CrossRateUSD")]
-    public string CrossRateUSD { get; set; }
+    public double ? CrossRateUSD { get; set; }
 
     [XmlElement("CrossRateOther")]
-    public string CrossRateOther { get; set; }
+    public double ? CrossRateOther { get; set; }
 }
