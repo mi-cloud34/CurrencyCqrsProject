@@ -11,7 +11,7 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
 
-        CreateMap<Currency, CurrencyModelListDto>().ReverseMap();
-        CreateMap<IPaginate<Currency>, CurrencyModelListModel>().ReverseMap();
+        CreateMap<CurrencyModel, CurrencyModelListDto>().ReverseMap();
+        CreateMap<IPaginate<CurrencyModel>, CurrencyModelListModel>().ReverseMap();
     }
 }

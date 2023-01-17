@@ -18,15 +18,13 @@ namespace Persistance.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CurrencyCode = table.Column<string>(type: "text", nullable: false),
                     Unit = table.Column<int>(type: "integer", nullable: false),
-                    Isim = table.Column<string>(type: "text", nullable: false),
-                    CurrencyName = table.Column<string>(type: "text", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: false),
                     ForexBuying = table.Column<double>(type: "double precision", nullable: false),
                     ForexSelling = table.Column<double>(type: "double precision", nullable: false),
                     BanknoteBuying = table.Column<double>(type: "double precision", nullable: false),
                     BanknoteSelling = table.Column<double>(type: "double precision", nullable: false),
-                    CrossRateUSD = table.Column<double>(type: "double precision", nullable: false),
-                    CrossRateOther = table.Column<double>(type: "double precision", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },

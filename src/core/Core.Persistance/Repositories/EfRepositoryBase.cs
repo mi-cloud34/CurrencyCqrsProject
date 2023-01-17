@@ -137,9 +137,10 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public Task<IList<TEntity>> AddRangeAsync(List<TEntity> entity)
+    public async Task<IList<TEntity>> AddRangeAsync(List<TEntity> entity)
     {
-        Context.Entry(entity).State = EntityState.Added;
+       // Context.Entry(entity).State = EntityState.Added;
+        await Context.AddRangeAsync(entity);
         Context.SaveChanges();
         return default!;
     }

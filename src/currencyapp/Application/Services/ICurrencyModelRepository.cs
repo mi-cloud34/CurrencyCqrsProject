@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public interface ICurrencyModelRepository : IAsyncRepository<Currency>, IRepository<Currency>
+    public interface ICurrencyModelRepository : IAsyncRepository<CurrencyModel>, IRepository<CurrencyModel>
     {
 
     }
