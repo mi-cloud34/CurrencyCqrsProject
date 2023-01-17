@@ -12,8 +12,8 @@ using Persistance.Contexts;
 namespace Persistance.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20230116201513_init")]
-    partial class init
+    [Migration("20230117125201_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Persistance.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Currency", b =>
+            modelBuilder.Entity("Domain.Entities.CurrencyModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,13 +42,11 @@ namespace Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<double>("CrossRateOther")
-                        .HasColumnType("double precision");
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<double>("CrossRateUSD")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("CurrencyName")
+                    b.Property<string>("CurrencyCode")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -57,10 +55,6 @@ namespace Persistance.Migrations
 
                     b.Property<double>("ForexSelling")
                         .HasColumnType("double precision");
-
-                    b.Property<string>("Isim")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int>("Unit")
                         .HasColumnType("integer");

@@ -30,7 +30,7 @@ public class GetByIdCurrencModelQuery : IRequest<CurrencyModelDto>, ICacheRemove
         public async Task<CurrencyModelDto> Handle(GetByIdCurrencModelQuery request, CancellationToken cancellationToken)
         {
 
-            Currency? currencyModel = await _currencyModelRepository.GetAsync(b => b.Id == request.Id);
+            CurrencyModel? currencyModel = await _currencyModelRepository.GetAsync(b => b.Id == request.Id);
             CurrencyModelDto currencyModelDto = _mapper.Map<CurrencyModelDto>(currencyModel);
             return currencyModelDto;
         }
